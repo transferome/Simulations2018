@@ -8,7 +8,7 @@ def clean():
     files_keep = glob.glob('*py')
     folders_keep = ['constructhaplotypes', 'forqs', 'foundinghaplotypes',
                     'multinomialfreqs', 'preselect', 'recombination',
-                    'selectprep', 'simreads', 'harpsnp', 'core',
+                    'selectprep', 'simreads', 'harpsnp', 'core', 'fst',
                     '.git', '.idea']
     keep = files_keep + folders_keep
     folder_contents = os.listdir()

@@ -3,6 +3,7 @@ simulations of the artificial selection at Gen0 to Gen 15"""
 import harpsnp.harp_simreadfreq as harpfreq
 import harpsnp.harp_simreadlike as harplike
 import harpsnp.simread_sumfreq as simfreq
+import fst.fstwithinreplicate as fstwithin
 
 
 def simreads_harp(simreads_tags):
@@ -12,6 +13,11 @@ def simreads_harp(simreads_tags):
     harplike.like_multi(simreads_tags)
     harpfreq.freq_multi(simreads_tags)
     simfreq.sumtag_freqs(simreads_tags)
+
+
+def fst_whithinreplicate(simreads_tags):
+    for tag in simreads_tags:
+        fstwithin.write_fst_dict(tag)
 
 
 if __name__ == '__main__':

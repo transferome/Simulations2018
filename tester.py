@@ -1,26 +1,21 @@
 """Test modules and functions within"""
-# import preselect.harpsnp.sumfreq as summer
-#
-# test = summer.read_freq('2R', '8000000-8097009_Gen0RepA.freqs')
-# mean_vals = test.mean(axis=0).tolist()
-# mean = ["{:.5f}".format(float(num)) for num in mean_vals]
-# mean.insert(0, 'mean')
-# var_vals = test.var(axis=0).tolist()
-# var = ["{:.8f}".format(float(num)) for num in var_vals]
-# var.insert(0, 'var')
-#
-# test.loc[len(test.index)] = mean
-# test.loc[len(test.index)] = var
-#
-# test.to_csv(path_or_buf='8000000-8097009_Gen0RepA.freqs', sep=',', header=True, index=False)
-#
-import numpy as np
 
-dat = [line for line in open('replicateA_frequencies.txt')]
-dat
-test = dat[0].rstrip('\n').split(',')[1:]
-numt = [float(x) for x in test]
-sum(numt)
-normt = [x/sum(numt) for x in numt]
-tot = np.random.multinomial(2000, normt, 10)
-len(tot[1])
+# dat = [line for line in open('8000000-8097009_RepA_simulations.freqs')]
+#
+# line1 = dat[1].rstrip('\n').split(',')[1:]
+# line2 = dat[2].rstrip('\n').split(',')[1:]
+#
+# with open('8000000-8097009_RepA_simulations.freqs') as file:
+#     data = [line.rstrip('\n') for line in file][1:]
+#     # make the list missing the start, and another missing the end
+#     output_list = list()
+#     for idx, line in enumerate(data, 1):
+#         if not idx % 2 == 0:
+#             pair = (line, data[idx])
+#             output_list.append(pair)
+#         else:
+#             pass
+#
+# output_list
+#
+# fst(line1, line2)

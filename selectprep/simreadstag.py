@@ -33,6 +33,7 @@ class SimreadsTag:
                     break
         self.simulated_frequency = None
         self.final_frequency_file = '{}-{}_Rep{}_simulations.freqs'.format(str(self.region[0]), str(self.region[1]), self.replicate)
+        self.fst_compare = '{}-{}_Rep{}_Fst.txt'.format(str(self.region[0]), str(self.region[1]), self.replicate)
 
     def get_simulated_frequencies(self):
         """This gets the mean frequencies from the frequencies simulated by harp at

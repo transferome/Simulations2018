@@ -24,10 +24,11 @@ class SamplingDict:
         """Write the dictionary information to a file"""
         for idx, key in enumerate(self.dictionary.keys(), 1):
             sampling_array = self.dictionary[key]
-            sampling_list = sampling_array.tolist()
+            # sampling_list = sampling_array.tolist()
             with open('{}_rep{}.sample'.format(key, replicate), 'w+') as f:
-                for idy, lst in enumerate(sampling_list, 1):
-                    f.write("r{}-m{},{}\n".format(str(idx), str(idy), ','.join([str(x) for x in lst])))
+                for idy, lst in enumerate(sampling_array, 1):
+                    f.write("r{}-m{}u,{}\n".format(str(idx), str(idy), ','.join([str(x) for x in lst])))
+                    f.write("r{}-m{}d,{}\n".format(str(idx), str(idy), ','.join([str(x) for x in lst])))
 
 
 if __name__ == '__main__':

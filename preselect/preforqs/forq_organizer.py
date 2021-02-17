@@ -19,7 +19,8 @@ class Organizer:
             self.simulation_directories = sorted(dirs, key=lambda x: int(x.split('_')[1]))
         else:
             print('Error!: Simulation Number and Directory Number Are Not Equal')
-        self.population_files = ['{}/population_final_pop1.txt'.format(directory) for directory in self.simulation_directories]
+        self.population_files = ['{}/population_final_pop1.txt'.format(directory) for directory
+                                 in self.simulation_directories]
 
     def move_configs(self):
         """Move all of the config files created for preforqs, into the preforqs directory the config file created"""
@@ -41,10 +42,10 @@ class Organizer:
 
     def clear_all(self):
         """Remove everything created by a starting simulation"""
-        #TODO: it should be able to know not to delete python modules
+        # TODO: it should be able to know not to delete python modules
         standard_items = ['foundinghaplotypes', 'recombination',
                           'core', 'preselect', 'forqs', 'constructhaplotypes',
-                          '__init__.py', 'multinomialfreqs', 'selectprep', 'simreads',
+                          '__init__.py', 'multinomialfreqs', 'selectprep', 'simreads', 'fst',
                           'program.py', 'constructhaplotypes', 'harpsnp', 'tester.py', 'clear.py']
         all_items = glob.glob('*')
         remove_items = [item for item in all_items if item not in standard_items]
@@ -57,6 +58,3 @@ class Organizer:
 
 if __name__ == '__main__':
     pass
-
-
-

@@ -21,6 +21,7 @@ def subregion_processes(region_tags, replicate='A'):
         tagger.add_simfrequency_attribute(stags)
         tagger.write_frequency_comparison_file(stags)
         tagger.clean_region(stags)
+        simharp.fst_whithinreplicate(stags)
 
 
 if __name__ == '__main__':

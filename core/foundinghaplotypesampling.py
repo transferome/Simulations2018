@@ -13,9 +13,9 @@ import multinomialfreqs.freqregidict as fdict
 def starting_frequencies():
     frequency_dictionary = fdict.FreqDict()
     # currently sampling 20 multinomial frequency distributions
-    sample_a = fdict.SamplingDict(frequency_dictionary.A, 20)
+    sample_a = fdict.SamplingDict(frequency_dictionary.A, 10)
     sample_a.write_samples(replicate='A')
-    sample_b = fdict.SamplingDict(frequency_dictionary.B, 20)
+    sample_b = fdict.SamplingDict(frequency_dictionary.B, 10)
     sample_b.write_samples(replicate='B')
 
 
