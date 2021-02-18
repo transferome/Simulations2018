@@ -4,6 +4,7 @@ import harpsnp.harp_simreadfreq as harpfreq
 import harpsnp.harp_simreadlike as harplike
 import harpsnp.simread_sumfreq as simfreq
 import fst.fstwithinreplicate as fstwithin
+import fst.fstbetweenreplicate as fstbetweenf
 
 
 def simreads_harp(simreads_tags):
@@ -18,6 +19,10 @@ def simreads_harp(simreads_tags):
 def fst_whithinreplicate(simreads_tags):
     for tag in simreads_tags:
         fstwithin.write_fst_dict(tag)
+
+
+def fst_bewtweenreplicate():
+    fstbetweenf.fst_between()
 
 
 if __name__ == '__main__':

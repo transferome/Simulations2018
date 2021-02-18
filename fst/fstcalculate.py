@@ -13,12 +13,14 @@ def pooled_expected_heterozygosity(frequency_list1, frequency_list2):
 
 
 def heterozygosity(sample_frequency_list):
-    """Returns expected heterozygosity for a population sample given a normalized list of frequencies"""
+    """Returns expected heterozygosity for a population sample given a normalized list of frequencies
+    The heterozygosity function will normalize most of the harp frequency vectors, they generally do not sum
+    exactly to 1, but very very close.  Adjustment probably doesn't matter, only a precaution."""
     frequency_sum = sum([float(s) for s in sample_frequency_list])
     if frequency_sum == 1:
         return 1 - sum([float(s)**2 for s in sample_frequency_list])
     else:
-        print('Normalizing')
+        # print(str(frequency_sum))
         normed = [float(s)/frequency_sum for s in sample_frequency_list]
         return 1 - sum([float(s)**2 for s in normed])
 
