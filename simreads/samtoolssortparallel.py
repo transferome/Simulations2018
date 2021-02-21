@@ -9,7 +9,7 @@ def samtools_sort(bamfile):
     sorted_bam_file = '{}_sorted.bam'.format(bamfile.split('.bam')[0])
     command_list = ['samtools', 'sort', '-@4', bamfile, '-o', sorted_bam_file]
     command = ' '.join(command_list)
-    print(command)
+    # print(command)
     subprocess.call(command, shell=True)
 
 

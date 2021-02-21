@@ -54,7 +54,7 @@ class PreSimParam:
                 nfinfo.clear_all()
             else:
                 self.length()
-                print(self.region_length)
+                # print(self.region_length)
                 finfo.clear_all()
                 activate -= 1
 

@@ -29,7 +29,7 @@ class SumFreq:
 
     def sumf(self):
         for freq in self.freqs:
-            print(freq)
+            # print(freq)
             df = read_freq(self.chromosome, freq)
             mean_vals = df.mean(axis=0).tolist()
             mean = ["{:.5f}".format(float(num)) for num in mean_vals]

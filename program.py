@@ -29,6 +29,7 @@ def subregion_processes(region_tags, replicate='A'):
 def post(blueprint):
     pst.fst_bewtweenreplicate()
     pst.average_fst(blueprint)
+    pst.mover(blueprint)
 
 
 if __name__ == '__main__':
@@ -38,11 +39,11 @@ if __name__ == '__main__':
     sim_num = 10
     bloop = region_blueprint.preselection_recombination(cont, regi, sim_num)
     estimatefounders.harp_estimate(bloop)
-    samplefreqs.starting_frequencies(5)
+    samplefreqs.starting_frequencies(2)
     estimatesamples.harp_final(bloop)
     # putting in 100 for the simulation of selection
-    regiontagsA = tagger.make_tags(cont, 10, replicate='A')
+    regiontagsA = tagger.make_tags(cont, 4, replicate='A')
     subregion_processes(regiontagsA, replicate='A')
-    regiontagsB = tagger.make_tags(cont, 10, replicate='B')
+    regiontagsB = tagger.make_tags(cont, 4, replicate='B')
     subregion_processes(regiontagsB, replicate='B')
     post(bloop)

@@ -15,10 +15,10 @@ def clean():
     contents_delete = [content for content in folder_contents if content not in keep]
     for content in contents_delete:
         if os.path.isfile(content):
-            print(content)
+            # print(content)
             os.remove(content)
         else:
-            print(content)
+            # print(content)
             shutil.rmtree(content)
 
 

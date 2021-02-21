@@ -32,7 +32,7 @@ def fst_end(comparison):
 def write_end(comparison):
     """writes out the fst info after its been calculated"""
     fstdata = fst_end(comparison)
-    with open('{}_fst.txt'.format(comparison[2]), 'w+') as outputfile:
+    with open('{}_Fst.dat'.format(comparison[2]), 'w+') as outputfile:
         for line in fstdata:
             outputfile.write(line)
 
