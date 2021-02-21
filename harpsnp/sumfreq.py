@@ -20,20 +20,36 @@ def read_freq(chromosome, freqfile):
     return file
 
 
-def sumfreq(chromosome):
-    freqs = glob.glob('*.freqs')
-    freqs = [s for s in freqs if chromosome not in s]
-    for freq in freqs:
-        df = read_freq(chromosome, freq)
-        mean_vals = df.mean(axis=0).tolist()
-        mean = ["{:.5f}".format(float(num)) for num in mean_vals]
-        mean.insert(0, 'mean')
-        var_vals = df.var(axis=0).tolist()
-        var = ["{:.8f}".format(float(num)) for num in var_vals]
-        var.insert(0, 'var')
-        df.loc[len(df.index)] = mean
-        df.loc[len(df.index)] = var
-        df.to_csv(path_or_buf=freq, sep=',', header=True, index=False)
+class SumFreq:
+
+    def __init__(self, chromosome):
+        self.chromosome = chromosome
+        freqs = glob.glob('*.freqs')
+        self.freqs = [s for s in freqs if self.chromosome not in s]
+
+    def sumf(self):
+        for freq in self.freqs:
+            print(freq)
+            df = read_freq(self.chromosome, freq)
+            mean_vals = df.mean(axis=0).tolist()
+            mean = ["{:.5f}".format(float(num)) for num in mean_vals]
+            mean.insert(0, 'mean')
+            var_vals = df.var(axis=0).tolist()
+            var = ["{:.8f}".format(float(num)) for num in var_vals]
+            var.insert(0, 'var')
+            df.loc[len(df.index)] = mean
+            df.loc[len(df.index)] = var
+            df.to_csv(path_or_buf=freq, sep=',', header=True, index=False)
+
+
+class SumFreqEnd(SumFreq):
+    """Sum up files resulting from estimating Generation 15 haplotype frequencies"""
+
+    def __init__(self, chromosome):
+        super(SumFreqEnd, self).__init__(chromosome)
+        self.chromosome = chromosome
+        freqs = glob.glob('*Gen15*.freqs')
+        self.freqs = [s for s in freqs if self.chromosome not in s]
 
 
 if __name__ == '__main__':

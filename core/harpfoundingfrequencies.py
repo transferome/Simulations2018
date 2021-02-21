@@ -32,10 +32,11 @@ def harp_estimate(blprint):
     hpl = harpi.Harp(blprint)
     hpl.freq(blprint.region_size)
     hpl.clean()
-    subsetter = sub.splitFreqs(blprint.file)
+    subsetter = sub.SplitFreqs(blprint.file)
     subsetter.split(replicate='A')
     subsetter.split(replicate='B')
-    summer.sumfreq(blprint.chromosome)
+    suminit = summer.SumFreq(blprint.chromosome)
+    suminit.sumf()
     subsetter.gatherfreq(replicate='A')
     subsetter.gatherfreq(replicate='B')
 

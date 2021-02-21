@@ -1,5 +1,5 @@
 """Runs harp to get frequency estimates from Generation 0 Experimental Data"""
-import harpsnp.harp_gen0freq as hfreq
+import harpsnp.harp_freq as hfreq
 import harpsnp.harp_gen0like as hlk
 import harpsnp.harpclean as hclean
 
@@ -21,7 +21,7 @@ class Harp:
 
     def freq(self, width):
         """Run the frequency command"""
-        hfreq.freq_multi(self.region, width)
+        hfreq.freq_multi(self.region, width, gen='Gen0')
 
     def clean(self):
         """Run the cleaning class"""

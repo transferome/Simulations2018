@@ -12,10 +12,10 @@ class HarpClean:
         hlk_files = glob.glob('*.hlk')
         for direct in output_directories:
             shutil.rmtree(direct)
-            print(direct)
+            # print(direct)
         for file in hlk_files:
             os.remove(file)
-            print(file)
+            # print(file)
 
 
 class HarpSimClean(HarpClean):
@@ -28,13 +28,33 @@ class HarpSimClean(HarpClean):
         bam_files = glob.glob('*.bam*')
         for direct in output_directories:
             shutil.rmtree(direct)
-            print(direct)
+            # print(direct)
         for file in hlk_files:
             os.remove(file)
-            print(file)
+            # print(file)
         for bam in bam_files:
             os.remove(bam)
-            print(bam)
+            # print(bam)
+
+
+class HarpEndClean(HarpClean):
+    """Clean results of har simreads"""
+
+    def __init__(self):
+        super(HarpEndClean, self).__init__()
+        output_directories = glob.glob('*Gen15*.output')
+        self.freqs = glob.glob('*Gen15*.freqs')
+        hlk_files = glob.glob('*.hlk')
+        for direct in output_directories:
+            shutil.rmtree(direct)
+            # print(direct)
+        for file in hlk_files:
+            os.remove(file)
+            # print(file)
+
+    def clear_freq(self):
+        for freq in self.freqs:
+            os.remove(freq)
 
 
 if __name__ == '__main__':

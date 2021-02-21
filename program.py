@@ -1,9 +1,11 @@
 import core.regionblueprint as region_blueprint
 import core.harpfoundingfrequencies as estimatefounders
+import core.harpgen15frequencies as estimatesamples
 import core.foundinghaplotypesampling as samplefreqs
 import core.processtags as tagger
 import core.simreads as simreads
 import core.harpsimulatedfrequencies as simharp
+import core.postsimulation as pst
 import harpsnp.harpclean as simclean
 
 
@@ -22,17 +24,25 @@ def subregion_processes(region_tags, replicate='A'):
         tagger.write_frequency_comparison_file(stags)
         tagger.clean_region(stags)
         simharp.fst_whithinreplicate(stags)
-        simharp.fst_bewtweenreplicate()
+
+
+def post(blueprint):
+    pst.fst_bewtweenreplicate()
+    pst.average_fst(blueprint)
 
 
 if __name__ == '__main__':
-    cont = '2R'
-    regi = (8000000, 10000000)
-    sim_num = 20
+    cont = '3R'
+    regi = (7000000, 9000000)
+    # this is number of simulations to determine recombination intervals
+    sim_num = 10
     bloop = region_blueprint.preselection_recombination(cont, regi, sim_num)
     estimatefounders.harp_estimate(bloop)
-    samplefreqs.starting_frequencies()
-    regiontagsA = tagger.make_tags(cont, sim_num, replicate='A')
+    samplefreqs.starting_frequencies(5)
+    estimatesamples.harp_final(bloop)
+    # putting in 100 for the simulation of selection
+    regiontagsA = tagger.make_tags(cont, 10, replicate='A')
     subregion_processes(regiontagsA, replicate='A')
-    regiontagsB = tagger.make_tags(cont, sim_num, replicate='B')
+    regiontagsB = tagger.make_tags(cont, 10, replicate='B')
     subregion_processes(regiontagsB, replicate='B')
+    post(bloop)

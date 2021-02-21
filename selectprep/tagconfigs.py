@@ -21,7 +21,7 @@ class TagConfigs:
 
     def create_configs(self):
         """Create a config file for a multinomial sampled region"""
-        converter.main_recmap(self.region)
+        converter.main_recmap(self.region, chr_arm=self.contig)
         for s in self.subtags:
             with open(resource_file) as infile, open('run_{}.config'.format(s), 'w+') as outfile:
                 for line in infile:

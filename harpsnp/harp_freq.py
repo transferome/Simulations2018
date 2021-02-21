@@ -17,9 +17,12 @@ def freq_process(region, width, hlk_file):
     subprocess.check_call(harp_freq_command, shell=False)
 
 
-def freq_multi(region, width):
+def freq_multi(region, width, gen='Gen0'):
     """runs harp freq in parallel multiprocess"""
-    hlks = glob.glob('*_Gen0*.hlk')
+    if gen == 'Gen0':
+        hlks = glob.glob('*_Gen0*.hlk')
+    else:
+        hlks = glob.glob('*Gen15*.hlk')
     pool = Pool(21)
     adjusted_func = partial(freq_process, region, width)
     pool.map(adjusted_func, hlks)
@@ -29,6 +32,3 @@ def freq_multi(region, width):
 
 if __name__ == '__main__':
     pass
-    # freq_multi(args.chr, args.step, args.width, freq_process)
-    # renamer(args.chr, args.step, args.width)
-    # mover(args.chr, args.width)
