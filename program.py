@@ -35,13 +35,3 @@ if __name__ == '__main__':
     cont = '2R'
     regi = (7000000, 9000000)
     main(cont, regi, 20, 20)
-    # bloop = region_blueprint.preselection_recombination(cont, regi, sim_num)
-    # estimatefounders.harp_estimate(bloop)
-    # samplefreqs.starting_frequencies(20)
-    # estimatesamples.harp_final(bloop)
-    # # putting in 100 for the simulation of selection
-    # regiontagsA = tagger.make_tags(cont, 40, replicate='A')
-    # subpar.subregion_processes(regiontagsA, replicate='A')
-    # regiontagsB = tagger.make_tags(cont, 40, replicate='B')
-    # subpar.subregion_processes(regiontagsB, replicate='B')
-    # post(bloop)
