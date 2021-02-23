@@ -2,7 +2,7 @@
 import glob
 import shutil
 import os
-import organize.maindirectory as mkmdir
+import organize.directorymaker as mydir
 
 
 class HarpClean:
@@ -52,11 +52,11 @@ class HarpEndClean(HarpClean):
             os.remove(file)
             # print(file)
 
-    def clear_freq(self, blueprint):
-        maindirectory = mkmdir.maindir(blueprint)
+    def move_freq(self, blueprint):
+        endfreq_directory = mydir.endfreq_dir(blueprint)
         freqs = glob.glob('*Gen15*.freqs')
         for freq in freqs:
-            shutil.move(freq, maindirectory)
+            shutil.move(freq, endfreq_directory)
 
 
 if __name__ == '__main__':

@@ -6,8 +6,8 @@ import shutil
 
 def clean():
     files_keep = glob.glob('*py')
-    folders_keep = ['constructhaplotypes', 'forqs', 'foundinghaplotypes',
-                    'multinomialfreqs', 'preselect', 'recombination',
+    folders_keep = ['constructhaplotypes', 'forqs', 'foundinghaplotypes', 'graphing',
+                    'multinomialfreqs', 'preselect', 'recombination', 'organize',
                     'selectprep', 'simreads', 'harpsnp', 'core', 'results', 'fst',
                     '.git', '.idea']
     keep = files_keep + folders_keep

@@ -19,7 +19,7 @@ def harp_final(blueprint):
     endfreq.sumf()
     subsetter.gather_end()
     fst.endfst()
-    enclean.clear_freq(blueprint)
+    enclean.move_freq(blueprint)
 
 
 if __name__ == '__main__':

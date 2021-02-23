@@ -43,7 +43,7 @@ class Organizer:
     def clear_all(self):
         """Remove everything created by a starting simulation"""
         # TODO: it should be able to know not to delete python modules
-        standard_items = ['foundinghaplotypes', 'recombination',
+        standard_items = ['foundinghaplotypes', 'recombination', 'organize', 'graphing',
                           'core', 'preselect', 'forqs', 'constructhaplotypes',
                           '__init__.py', 'multinomialfreqs', 'selectprep', 'simreads', 'fst',
                           'program.py', 'constructhaplotypes', 'results', 'harpsnp', 'tester.py', 'clear.py']
