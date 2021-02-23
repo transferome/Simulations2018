@@ -4,10 +4,10 @@ import preselect.harpfinal as harpf
 import preselect.handlefreqs as sub
 import harpsnp.sumfreq as summer
 import fst.fstendfreqs as fst
-import core.timetracer as timer
+# import core.timetracer as timer
 
 
-@timer.timer(label="HarpEnd")
+# @timer.timer(label="HarpEnd")
 def harp_final(blueprint):
     hpf = harpf.HarpEnd(blueprint)
     hpf.like()

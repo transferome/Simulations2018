@@ -5,11 +5,11 @@ to 1000 diploid individuals.  For each subregion, it creates a specified number 
   Creates a file of 20 lines in length for each subregion, with a different multinomial
   draw from the starting estimate frequencies.  The 20 value can be altered as desired
   at this point, it is arbitrary"""
-import core.timetracer as timer
+# import core.timetracer as timer
 import multinomialfreqs.freqregidict as fdict
 
 
-@timer.timer(label='Frequencies')
+# @timer.timer(label='Frequencies')
 def starting_frequencies(simulation_pairs):
     frequency_dictionary = fdict.FreqDict()
     # currently sampling 20 multinomial frequency distributions

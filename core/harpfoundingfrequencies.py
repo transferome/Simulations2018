@@ -24,10 +24,10 @@ in that region in the Gen0 data for each replicate"""
 import preselect.harpinitial as harpi
 import preselect.handlefreqs as sub
 import harpsnp.sumfreq as summer
-import core.timetracer as timer
+# import core.timetracer as timer
 
 
-@timer.timer(label='Harp')
+# @timer.timer(label='Harp')
 def harp_estimate(blprint):
     hpl = harpi.Harp(blprint)
     hpl.freq(blprint.region_size)

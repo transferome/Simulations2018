@@ -46,7 +46,7 @@ class Organizer:
         standard_items = ['foundinghaplotypes', 'recombination',
                           'core', 'preselect', 'forqs', 'constructhaplotypes',
                           '__init__.py', 'multinomialfreqs', 'selectprep', 'simreads', 'fst',
-                          'program.py', 'constructhaplotypes', 'harpsnp', 'tester.py', 'clear.py']
+                          'program.py', 'constructhaplotypes', 'results', 'harpsnp', 'tester.py', 'clear.py']
         all_items = glob.glob('*')
         remove_items = [item for item in all_items if item not in standard_items]
         for item in remove_items:
