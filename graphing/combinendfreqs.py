@@ -15,16 +15,22 @@ class EndFreqs:
                           'Gen15CtrlB': None}
         for key in self.freq_dict.keys():
             files = [s for s in all_freqs if '_Gen15_{}'.format(key) in s]
-            files.sort(key=lambda x: int(x.split('_')[0].split('-')[0]))
+            files.sort(key=lambda x: int(x.split('/')[2].split('_')[0].split('-')[0]))
             self.freq_dict[key] = files
+        self.output_files = list()
 
     def combine(self):
         for key, files in self.freq_dict.items():
+            self.output_files.append('{}_combined.freqs'.format(key))
             with open('{}_combined.freqs'.format(key), 'w+') as output:
                 for file in files:
-                    position = file.split('_')[0].split('-')[0]
+                    position = file.split('/')[2].split('_')[0].split('-')[0]
                     mean_line = [line for line in open(file) if line.startswith('mean')][0]
                     output.write('{},{}'.format(position, ','.join(mean_line.split(',')[3:])))
+
+    def return_files(self):
+        """Outputs the list of combined files"""
+        return self.output_files
 
 
 if __name__ == '__main__':

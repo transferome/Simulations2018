@@ -4,11 +4,16 @@ import subprocess
 from multiprocessing import Pool
 
 
+def make_step(width):
+    """Creates a step that is 10% of the window size"""
+    return str(round(width * 0.10))
+
+
 def freq_process(simreads_tag):
     """Executes harp freq command"""
     harp_freq_command = ['harp', 'freq', '--hlk', simreads_tag.hlk_file,
                          '--region', simreads_tag.harp_region, '--window_step',
-                         '10000', '--window_width', '100000']
+                         make_step(simreads_tag.region_length), '--window_width', str(simreads_tag.region_length)]
     subprocess.check_call(harp_freq_command, shell=False)
 
 
