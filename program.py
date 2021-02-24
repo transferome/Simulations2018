@@ -5,7 +5,12 @@ import core.foundinghaplotypesampling as samplefreqs
 import core.processtags as tagger
 import core.subregionprocess as subpar
 import core.postsimulation as pst
+import graphing.combinendfreqs as grph
 import core.timetracer as tracer
+
+
+# TODO: Other experimental Fst comparisons, Up1A vs Up2A, Dwn1A vs Dwn2A, same for B's
+# TODO: Verify that haplotypes are still all unique within the subregions defined during the simulation
 
 
 def post(blueprint):
@@ -29,9 +34,11 @@ def main(contig, region, recombination_simulation_number, selection_simulation_p
     regiontags_b = tagger.make_tags(cont, selection_simulation_pair_number * 2, replicate='B')
     subpar.subregion_processes(regiontags_b, replicate='B')
     post(bloop)
+    graph = grph.EndFreqs(bloop)
+    graph.combine()
 
 
 if __name__ == '__main__':
     cont = '2R'
     regi = (7000000, 9000000)
-    main(cont, regi, 20, 20)
+    main(cont, regi, 2, 2)
