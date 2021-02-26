@@ -6,6 +6,7 @@ import core.processtags as tagger
 import core.subregionprocess as subpar
 import core.postsimulation as pst
 import graphing.combinendfreqs as grph
+# import graphing.makegraphs as grapher
 import core.timetracer as tracer
 
 
@@ -36,6 +37,8 @@ def main(contig, region, recombination_simulation_number, selection_simulation_p
     post(bloop)
     graph = grph.EndFreqs(bloop)
     graph.combine()
+    combined_files = graph.return_files()
+    # grapher.plot_freqs(combined_files, contig, bloop)
 
 
 if __name__ == '__main__':

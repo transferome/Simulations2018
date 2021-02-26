@@ -34,7 +34,8 @@ def mover(blueprint):
     for csv in csvs:
         shutil.move(csv, junk_direct)
     for freq in freqs:
-        shutil.move(freq, junk_direct)
+        if 'combined' not in freq:
+            shutil.move(freq, junk_direct)
     for txt in txts:
         shutil.move(txt, junk_direct)
     for dat in dats:

@@ -30,7 +30,7 @@ class EndFreqs:
 
     def return_files(self):
         """Outputs the list of combined files"""
-        return self.output_files
+        return self.output_files + ['Gen0A_combined.freqs', 'Gen0B_combined.freqs']
 
 
 if __name__ == '__main__':

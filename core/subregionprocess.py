@@ -15,6 +15,7 @@ def subregion_processes(region_tags, replicate='A'):
         tagger.write_simread_configs(stags)
         simreads.simreads_run(stags)
         simharp.simreads_harp(stags)
+        simharp.gen0combine(replicate)
         simclean.HarpSimClean()
         tagger.add_simfrequency_attribute(stags)
         tagger.write_frequency_comparison_file(stags)
