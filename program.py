@@ -6,8 +6,10 @@ import core.processtags as tagger
 import core.subregionprocess as subpar
 import core.postsimulation as pst
 import graphing.combinendfreqs as grph
-# import graphing.makegraphs as grapher
-import core.timetracer as tracer
+import organize.movecombined as cmover
+import organize.main2results as finalmove
+# import core.timetracer as tracer
+import timeit
 
 
 # TODO: Other experimental Fst comparisons, Up1A vs Up2A, Dwn1A vs Dwn2A, same for B's
@@ -20,7 +22,7 @@ def post(blueprint):
     pst.mover(blueprint)
 
 
-@tracer.timer(label="Simulation Program")
+# @tracer.timer(label="Simulation Program")
 def main(contig, region, recombination_simulation_number, selection_simulation_pair_number):
     """Recombination simulation number is how many times simulations will run to get the average
     recombination chunk size.
@@ -38,10 +40,15 @@ def main(contig, region, recombination_simulation_number, selection_simulation_p
     graph = grph.EndFreqs(bloop)
     graph.combine()
     combined_files = graph.return_files()
+    cmover.combinemove(bloop, combined_files)
+    finalmove.move2results(bloop)
     # grapher.plot_freqs(combined_files, contig, bloop)
 
 
 if __name__ == '__main__':
+    tic = timeit.default_timer()
     cont = '2R'
     regi = (7000000, 9000000)
-    main(cont, regi, 2, 2)
+    main(cont, regi, 20, 50)
+    toc = timeit.default_timer()
+    print(toc - tic)

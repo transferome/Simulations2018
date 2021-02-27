@@ -31,7 +31,7 @@ def fst_dir(blueprint):
 
 
 def graph_dir(blueprint):
-    path = '{}:{}-{}_haplotype_graphs'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
+    path = '{}:{}-{}_data2graph'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
     return creator(path)
 
 

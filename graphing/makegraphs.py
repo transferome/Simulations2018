@@ -1,6 +1,5 @@
 """  Make data from the frequency file so it can be graphed.
 This will take the list of returned files from the EndFreqs objects in combinedfreqs.py"""
-import organize.directorymaker as dirmkr
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from matplotlib import rcParams
@@ -13,7 +12,8 @@ class HarpPlot:
     def __init__(self, filename, chromosome, blueprint):
         """Gets the list of positions from the file"""
         self.filename = filename
-        self.directory = dirmkr.graph_dir(blueprint)
+        # TODO: need to change this, graphing will need to be done on my machine, ohta doesn't have matplotlib
+        self.directory = None
         with open(self.filename) as f:
             data = [line.rstrip('\n') for line in f]
         self.positions = [int(line.split(',')[0]) for line in data]
