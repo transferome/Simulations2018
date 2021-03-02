@@ -2,18 +2,36 @@
 This will take the list of returned files from the EndFreqs objects in combinedfreqs.py"""
 import matplotlib.pyplot as plt
 from matplotlib import cm
-from matplotlib import rcParams
+# from matplotlib import rcParams
 from numpy import linspace
-rcParams['font.family'] = "serif"
+# rcParams['font.family'] = "serif"
+# plt.style.use('dark_background')
+
+
+plt.rcParams.update({
+    "lines.color": "white",
+    "patch.edgecolor": "white",
+    "text.color": "white",
+    "axes.facecolor": "black",
+    "axes.edgecolor": "dimgray",
+    "axes.labelcolor": "white",
+    "xtick.color": "white",
+    "ytick.color": "white",
+    "grid.color": "black",
+    "figure.facecolor": "black",
+    "figure.edgecolor": "black",
+    "savefig.facecolor": "black",
+    "font.monospace": "monospace",
+    "savefig.edgecolor": "black"})
+
 
 
 class HarpPlot:
 
-    def __init__(self, filename, chromosome, blueprint):
+    def __init__(self, filename, chromosome):
         """Gets the list of positions from the file"""
         self.filename = filename
         # TODO: need to change this, graphing will need to be done on my machine, ohta doesn't have matplotlib
-        self.directory = None
         with open(self.filename) as f:
             data = [line.rstrip('\n') for line in f]
         self.positions = [int(line.split(',')[0]) for line in data]
@@ -37,6 +55,7 @@ class HarpPlot:
         # no -1 because last subregions final coordinate does not start another region
         self.row_range_list.append(range(self.positions[-1], self.final_position))
         self.col_dict = {idx: None for idx, col in enumerate(data[0].split(','))}
+        del self.col_dict[0]
         for key in self.col_dict.keys():
             freq_list = list()
             for line in data:
@@ -44,15 +63,26 @@ class HarpPlot:
             self.col_dict[key] = freq_list
         self.fig = None
         self.ax = None
+        self.ymax = None
         # adding colors consistent coloring
         self.dgrp_number_of_lines = len(list(self.col_dict.keys()))
         cm_subsection = linspace(0, 1, self.dgrp_number_of_lines)
-        self.colormap = [cm.tab10(x) for x in cm_subsection]
-        self.graph_file = '{}/{}_frequencies.png'.format(self.directory, self.filename.split('-')[0])
+        self.colormap = [cm.Paired(x) for x in cm_subsection]
+        self.graph_file = '{}_frequencies.png'.format(self.filename.split('_')[0])
+
+    def find_ymax(self):
+        max_val = 0
+        for key in self.col_dict.keys():
+            freqs_check = self.col_dict[key]
+            new_max = round(max(freqs_check), 2)
+            if new_max > max_val:
+                max_val = new_max
+        self.ymax = round(max_val, 2)
+        # print(str(self.ymax))
 
     def plot(self):
         self.fig, self.ax = plt.subplots(nrows=1, ncols=1, figsize=(20, 10))
-        self.ax.set_ylim([0, 1])
+        self.ax.set_ylim([0, self.ymax + 0.05])
         xlim = len(range(1, 1000)) * len(self.row_range_list)
         self.ax.set_xlim([1, xlim])
         self.ax.set_title(self.title, fontsize=20)
@@ -60,28 +90,34 @@ class HarpPlot:
             y_data = list()
             for rng, freq in zip(self.row_range_list, self.col_dict[key]):
                 y_data.extend([freq for _ in range(1, 1000)])
-            self.ax.plot(range(1, xlim + 1), y_data, color=color_iterator)
+            self.ax.plot(range(1, xlim + 1), y_data, color=color_iterator, linewidth=5.0)
         # self.ax.set_xticks([idx for idx, s in enumerate(self.positions)])
         xticks = list(range(1, xlim, 1000))
         xticklables = ["{:,}".format(x) for x in self.positions]
-        yticks = [0.2, 0.4, 0.6, 0.8]
-        yticklabels = ['0.2', '0.4', '0.6', '0.8']
+        # yrange = range(0, self.ymax + 0.05, 0)
+        # yticks = [0.2, 0.4, 0.6, 0.8]
+        # yticklabels = ['0.2', '0.4', '0.6', '0.8']
         self.ax.set_xticks(xticks[0::2])
         self.ax.set_xticklabels(xticklables[0::2])
-        self.ax.set_yticks(yticks)
-        self.ax.set_yticklabels(yticklabels)
+        # self.ax.set_yticks(yticks)
+        # self.ax.set_yticklabels(yticklabels)
         plt.setp(self.ax.get_xticklabels(), fontsize=15)
         plt.setp(self.ax.get_yticklabels(), fontsize=15)
         self.ax.set_ylabel('Haplotype Fequency', fontsize=16)
         self.ax.set_xlabel(self.x_axis_label, fontsize=16)
 
 
-def plot_freqs(combined_file_list, chromosome, blueprint):
+def plot_freqs(combined_file_list, chromosome):
     for comb in combined_file_list:
-        hplot = HarpPlot(comb, chromosome, blueprint)
+        hplot = HarpPlot(comb, chromosome)
+        hplot.find_ymax()
         hplot.plot()
         hplot.fig.savefig(hplot.graph_file)
 
 
 if __name__ == '__main__':
-    pass
+    import os
+    import glob
+    os.chdir('/home/solid-snake/raspver/quartz/testdat/2R_19000000-21000000_data2graph')
+    combined_files = glob.glob('*combined.freqs')
+    plot_freqs(combined_files, '2R')

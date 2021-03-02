@@ -48,7 +48,7 @@ def main(contig, region, recombination_simulation_number, selection_simulation_p
 if __name__ == '__main__':
     tic = timeit.default_timer()
     cont = '2R'
-    regi = (7000000, 9000000)
+    regi = (5000000, 7000000)
     main(cont, regi, 20, 50)
     toc = timeit.default_timer()
     print(toc - tic)
