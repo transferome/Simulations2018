@@ -2,10 +2,12 @@
 This will take the list of returned files from the EndFreqs objects in combinedfreqs.py"""
 import matplotlib.pyplot as plt
 from matplotlib import cm
-# from matplotlib import rcParams
+from matplotlib import rcParams
 from numpy import linspace
-# rcParams['font.family'] = "serif"
-# plt.style.use('dark_background')
+# on linux
+rcParams['font.family'] = "DejaVu Sans Mono"
+# on windows
+# rcParams['font.family'] = "monospace"
 
 
 plt.rcParams.update({
@@ -13,7 +15,7 @@ plt.rcParams.update({
     "patch.edgecolor": "white",
     "text.color": "white",
     "axes.facecolor": "black",
-    "axes.edgecolor": "dimgray",
+    "axes.edgecolor": "white",
     "axes.labelcolor": "white",
     "xtick.color": "white",
     "ytick.color": "white",
@@ -22,7 +24,8 @@ plt.rcParams.update({
     "figure.edgecolor": "black",
     "savefig.facecolor": "black",
     "font.monospace": "monospace",
-    "savefig.edgecolor": "black"})
+    "savefig.edgecolor": "black",
+    "figure.max_open_warning": 0})
 
 
 
@@ -49,7 +52,7 @@ class HarpPlot:
                                                                                            self.start_position, self.final_position))
         self.x_axis_label = 'Genomic Coordinate'
         # not going to add 1, that way x coordinates won't double up
-        self.row_range_list = [range(position, self.positions[i + 1] - 1) for i, position in enumerate(self.positions[:-1])]
+        self.row_range_list = [range(position, self.positions[i + 1]) for i, position in enumerate(self.positions[:-1])]
         # need to add the range for the final element in self.positions list (last line of file)
         # adding length of a region (they're all the same) to achieve that
         # no -1 because last subregions final coordinate does not start another region
@@ -67,7 +70,7 @@ class HarpPlot:
         # adding colors consistent coloring
         self.dgrp_number_of_lines = len(list(self.col_dict.keys()))
         cm_subsection = linspace(0, 1, self.dgrp_number_of_lines)
-        self.colormap = [cm.Paired(x) for x in cm_subsection]
+        self.colormap = [cm.gist_rainbow(x) for x in cm_subsection]
         self.graph_file = '{}_frequencies.png'.format(self.filename.split('_')[0])
 
     def find_ymax(self):
@@ -112,12 +115,15 @@ def plot_freqs(combined_file_list, chromosome):
         hplot = HarpPlot(comb, chromosome)
         hplot.find_ymax()
         hplot.plot()
-        hplot.fig.savefig(hplot.graph_file)
+        hplot.fig.savefig(hplot.graph_file, bbox_inches='tight')
+        plt.clf()
 
 
 if __name__ == '__main__':
     import os
     import glob
-    os.chdir('/home/solid-snake/raspver/quartz/testdat/2R_19000000-21000000_data2graph')
-    combined_files = glob.glob('*combined.freqs')
-    plot_freqs(combined_files, '2R')
+    graph_folders = glob.glob('/home/solid-snake/Data/mel_simulations2018/2R/testdat/*_data2graph')
+    for folder in graph_folders:
+        os.chdir(folder)
+        combined_files = glob.glob('*combined.freqs')
+        plot_freqs(combined_files, '2R')
