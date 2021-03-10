@@ -134,4 +134,4 @@ class FstClass:
 test = FstClass("/home/solid-snake/pyreseq/SimulationsPrior", '2R', 'Up1A', 'Dwn1A')
 test.find_ymax()
 test.plot()
-test.fig.show()
+test.fig.savefig('2R_9Mbp-11Mbp_Up_v_Down_1A_fst.png', bbox_inches='tight')
