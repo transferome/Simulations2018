@@ -15,8 +15,8 @@ plt.rcParams.update({
     "axes.facecolor": "black",
     "axes.edgecolor": "white",
     "axes.labelcolor": "white",
-    "xtick.color": "white",
-    "ytick.color": "white",
+    "xtick.color": "goldenrod",
+    "ytick.color": "goldenrod",
     "grid.color": "black",
     "figure.facecolor": "black",
     "figure.edgecolor": "black",
@@ -28,10 +28,8 @@ plt.rcParams.update({
 
 class FstClass:
 
-    def __init__(self, directory, chromosome):
+    def __init__(self, chromosome):
         """Gets the list of positions from the file"""
-        self.directory = directory
-        os.chdir(self.directory)
         self.chromosome = chromosome
         self.expdat1A = 'Exp_Up1A_Dwn1A_Fst.dat'
         self.expdat2A = 'Exp_Up2A_Dwn2A_Fst.dat'
@@ -140,16 +138,16 @@ class FstClass:
             # subtract 1, so that range
             self.range_list.append(range(a, b))
         self.outputfile = 'Fst_data.png'
-        self.title = 'Simulated/Control Divergence vs. Experimental Divergence    {}'.format(self.region)
-        self.x_label = 'Genomic Coordinate'
+        # self.title = 'Comparing Up & Down Haplotype Frequencies (1Kb windows)'
+        self.x_label = 'Genomic Coordinate: Chromosome Arm {}'.format(self.chromosome)
         # TODO: need to add variance to Fst when calculating so you can make error bars in graph (possibly)
-        self.y_label = 'Fst (mean value for simulation data)'
+        self.y_label = 'Fst (Haplotype Frequencies in 100Kb windows)'
         self.fig = None
         self.ax = None
         self.ymax = None
-        self.colormap1 = ['lavender', 'honeydew', 'honeydew']
+        self.colormap1 = ['honeydew', 'honeydew', 'honeydew']
         self.colormap2 = ['chartreuse']
-        self.colormap3 = ['darkorange']
+        self.colormap3 = ['orangered']
         self.colormap4 = ['chartreuse']
         self.colormap5 = ['violet']
         self.colormap6 = ['violet']
@@ -189,12 +187,15 @@ class FstClass:
         self.ymax = round(max_val, 2)
         # print(str(self.ymax))
 
+    def easy_ymax(self):
+        self.ymax = 0.8
+
     def plot(self):
-        self.fig, self.ax = plt.subplots(nrows=1, ncols=1, figsize=(15, 10))
+        self.fig, self.ax = plt.subplots(nrows=1, ncols=1, figsize=(12, 10))
         self.ax.set_ylim([0, self.ymax + 0.05])
         xlim = len(range(1, 1000)) * len(self.range_list)
         self.ax.set_xlim([1, xlim])
-        self.ax.set_title(self.title, fontsize=20)
+        # self.ax.set_title(self.title, fontsize=20)
         for key, color_iterator in zip(self.A1_dict.keys(), self.colormap2):
             y_data = list()
             for rng, freq in zip(self.range_list, self.A1_dict[key]):
@@ -224,11 +225,11 @@ class FstClass:
             y_data = list()
             for rng, freq in zip(self.range_list, self.c_dict[key]):
                 y_data.extend([freq for _ in range(1, 1000)])
-            self.ax.plot(range(1, xlim + 1), y_data, color=color_iterator, alpha=0.5, linewidth=5.0)
+            self.ax.plot(range(1, xlim + 1), y_data, color=color_iterator, alpha=0.8, linewidth=5.0)
 
         custom_lines = [Line2D([0], [0], color='chartreuse', lw=4, label='A Replicates'),
                         Line2D([0], [0], color='violet', lw=4, label='B Replicates'),
-                        Line2D([0], [0], color='darkorange', lw=4, alpha=0.5, label='Controls'),
+                        Line2D([0], [0], color='orangered', lw=4, alpha=0.8, label='Controls'),
                         Line2D([0], [0], color='honeydew', lw=4, linestyle='dashed', label='Simulated')]
         # self.ax.set_xticks([idx for idx, s in enumerate(self.positions)])
         xticks = list(range(1, xlim, 1000))
@@ -236,19 +237,27 @@ class FstClass:
         # yrange = range(0, self.ymax + 0.05, 0)
         # yticks = [0.2, 0.4, 0.6, 0.8]
         # yticklabels = ['0.2', '0.4', '0.6', '0.8']
-        legen = self.ax.legend(handles=custom_lines, loc='upper left')
+        legen = self.ax.legend(fontsize=13, handles=custom_lines, loc='upper left')
         plt.setp(legen.get_texts(), color='w')
 
         self.ax.set_xticks(xticks[0::4])
         self.ax.set_xticklabels(xticklables[0::4])
-        plt.setp(self.ax.get_xticklabels(), fontsize=15)
-        plt.setp(self.ax.get_yticklabels(), fontsize=15)
-        self.ax.set_ylabel('Fst', fontsize=18)
-        self.ax.set_xlabel(self.x_label, fontsize=16)
+        plt.setp(self.ax.get_xticklabels(), fontsize=13)
+        plt.setp(self.ax.get_yticklabels(), fontsize=13)
+        self.ax.set_ylabel(self.y_label, fontsize=17)
+        self.ax.set_xlabel(self.x_label, fontsize=17)
 
 
 if __name__ == '__main__':
-    test = FstClass("/home/solid-snake/Data/mel_simulations2018/2R/testdat/2R_5000000-7000000_Fst", '2R')
-    test.find_ymax()
-    test.plot()
-    test.fig.savefig('2R_5Mbp-7Mbp_Up_v_Down_1A_fst.png', bbox_inches='tight')
+    import os
+    import glob
+    x1 = 13
+    x2 = 15
+    os.chdir(f'/home/solid-snake/Data/mel_simulations2018/2R/testdat/2R_{x1}000000-{x2}000000_Fst')
+    plotobj = FstClass('2R')
+    plotobj.easy_ymax()
+    plotobj.plot()
+    plotobj.fig.savefig(f'/home/solid-snake/Data/mel_simulations2018/2R/testdat/Fst_temp/2R_'
+                        f'{x1}Mbp-{x2}Mbp_Up_v_Down_1A_fst'
+                        '.png', bbox_inches='tight')
+    plt.clf()

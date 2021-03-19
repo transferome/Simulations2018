@@ -17,8 +17,8 @@ plt.rcParams.update({
     "axes.facecolor": "black",
     "axes.edgecolor": "white",
     "axes.labelcolor": "white",
-    "xtick.color": "white",
-    "ytick.color": "white",
+    "xtick.color": "goldenrod",
+    "ytick.color": "goldenrod",
     "grid.color": "black",
     "figure.facecolor": "black",
     "figure.edgecolor": "black",
@@ -34,6 +34,7 @@ class HarpPlot:
     def __init__(self, filename, chromosome):
         """Gets the list of positions from the file"""
         self.filename = filename
+        self.chromosome = chromosome
         # TODO: need to change this, graphing will need to be done on my machine, ohta doesn't have matplotlib
         with open(self.filename) as f:
             data = [line.rstrip('\n') for line in f]
@@ -41,16 +42,13 @@ class HarpPlot:
         self.start_position = self.positions[0]
         self.final_position = self.positions[-1] + (self.positions[1] - self.positions[0])
         if 'Gen15' in self.filename:
-            self.title = 'Generation 15 {}         {}'.format(filename.split('_')[0].split('15')[1],
-                                                              '{}:{}-{}'.format(chromosome, self.start_position, self.final_position))
+            self.title = 'Generation 15 {}'.format(filename.split('_')[0].split('15')[1])
         if 'Gen0' in self.filename:
             if 'A' in self.filename:
-                self.title = 'Generation 0 ReplicateA         {}'.format('{}:{}-{}'.format(chromosome, self.start_position,
-                                                                                           self.final_position))
+                self.title = 'Generation 0 ReplicateA'
             if 'B' in self.filename:
-                self.title = 'Generation 0 ReplicateB         {}'.format('{}:{}-{}'.format(chromosome,
-                                                                                           self.start_position, self.final_position))
-        self.x_axis_label = 'Genomic Coordinate'
+                self.title = 'Generation 0 ReplicateB'
+        self.x_axis_label = 'Genomic Coordinate: Chromosome Arm {}'.format(self.chromosome)
         # not going to add 1, that way x coordinates won't double up
         self.row_range_list = [range(position, self.positions[i + 1]) for i, position in enumerate(self.positions[:-1])]
         # need to add the range for the final element in self.positions list (last line of file)
@@ -71,7 +69,7 @@ class HarpPlot:
         self.dgrp_number_of_lines = len(list(self.col_dict.keys()))
         cm_subsection = linspace(0, 1, self.dgrp_number_of_lines)
         self.colormap = [cm.gist_rainbow(x) for x in cm_subsection]
-        self.graph_file = '{}_frequencies2.png'.format(self.filename.split('_')[0])
+        self.graph_file = '{}_frequencies4.png'.format(self.filename.split('_')[0])
 
     def find_ymax(self):
         max_val = 0
@@ -82,6 +80,9 @@ class HarpPlot:
                 max_val = new_max
         self.ymax = round(max_val, 2)
         # print(str(self.ymax))
+
+    def easy_ymax(self):
+        self.ymax = 1.0
 
     def plot(self):
         self.fig, self.ax = plt.subplots(nrows=1, ncols=1, figsize=(12, 10))
@@ -104,12 +105,12 @@ class HarpPlot:
         self.ax.set_xticklabels(xticklables[0::4])
         # self.ax.set_yticks(yticks)
         # self.ax.set_yticklabels(yticklabels)
-        plt.setp(self.ax.get_xticklabels(), fontsize=15)
-        plt.setp(self.ax.get_yticklabels(), fontsize=15)
-        self.ax.set_ylabel('Haplotype Fequency', fontsize=16)
+        plt.setp(self.ax.get_xticklabels(), fontsize=14)
+        plt.setp(self.ax.get_yticklabels(), fontsize=14)
+        self.ax.set_ylabel('Founding Haplotype (DGRP) Frequencies', fontsize=16)
         self.ax.set_xlabel(self.x_axis_label, fontsize=16)
 
-
+# TODO: Easy and Find ymax are here
 def plot_freqs(combined_file_list, chromosome):
     for comb in combined_file_list:
         hplot = HarpPlot(comb, chromosome)
