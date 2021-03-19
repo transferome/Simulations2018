@@ -71,7 +71,7 @@ class HarpPlot:
         self.dgrp_number_of_lines = len(list(self.col_dict.keys()))
         cm_subsection = linspace(0, 1, self.dgrp_number_of_lines)
         self.colormap = [cm.gist_rainbow(x) for x in cm_subsection]
-        self.graph_file = '{}_frequencies.png'.format(self.filename.split('_')[0])
+        self.graph_file = '{}_frequencies2.png'.format(self.filename.split('_')[0])
 
     def find_ymax(self):
         max_val = 0
@@ -84,7 +84,7 @@ class HarpPlot:
         # print(str(self.ymax))
 
     def plot(self):
-        self.fig, self.ax = plt.subplots(nrows=1, ncols=1, figsize=(20, 10))
+        self.fig, self.ax = plt.subplots(nrows=1, ncols=1, figsize=(12, 10))
         self.ax.set_ylim([0, self.ymax + 0.05])
         xlim = len(range(1, 1000)) * len(self.row_range_list)
         self.ax.set_xlim([1, xlim])
@@ -100,8 +100,8 @@ class HarpPlot:
         # yrange = range(0, self.ymax + 0.05, 0)
         # yticks = [0.2, 0.4, 0.6, 0.8]
         # yticklabels = ['0.2', '0.4', '0.6', '0.8']
-        self.ax.set_xticks(xticks[0::2])
-        self.ax.set_xticklabels(xticklables[0::2])
+        self.ax.set_xticks(xticks[0::4])
+        self.ax.set_xticklabels(xticklables[0::4])
         # self.ax.set_yticks(yticks)
         # self.ax.set_yticklabels(yticklabels)
         plt.setp(self.ax.get_xticklabels(), fontsize=15)
