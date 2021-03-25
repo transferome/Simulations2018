@@ -26,7 +26,7 @@ class PreSimParam:
 
     def update(self, recombination_count):
         """Update region if recombination_count is > 10"""
-        if recombination_count > 0.010:
+        if recombination_count > 0.00001:
             self.region_length = self.region_length - round(self.region_length * 0.05)
             new_region = (self.region[0], self.region[0] + self.region_length)
             self.region = new_region

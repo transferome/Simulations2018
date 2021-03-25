@@ -1,7 +1,8 @@
-"""  Module to make graphs of the Fst values  """
+"""  Module  """
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 from matplotlib.lines import Line2D
+
 # on linux
 rcParams['font.family'] = "DejaVu Sans Mono"
 
@@ -38,7 +39,7 @@ class FstData:
         self.endpos = self.pos2[-1]
         self.region = '{}:{}-{}'.format(chromosome, str(self.startpos), str(self.endpos))
         self.dict = None
-        
+
     def dictionary(self):
         self.dict = {idx: None for idx, col in enumerate(self.data[0].split(','))}
         del self.dict[0]
@@ -63,10 +64,11 @@ class FstClass:
     def __init__(self, chromosome):
         """Gets the list of positions from the file"""
         self.chromosome = chromosome
-        self.expdatA1 = 'Exp_Up1A_Dwn1A_Fst.dat'
-        self.expdatA2 = 'Exp_Up2A_Dwn2A_Fst.dat'
-        self.expdatB1 = 'Exp_Up1B_Dwn1B_Fst.dat'
-        self.expdatB2 = 'Exp_Up2B_Dwn2B_Fst.dat'
+        self.expdatA1 = 'Exp_Up1A_CtrlA_Fst.dat'
+        self.expdatA2 = 'Exp_Up2A_CtrlA_Fst.dat'
+        self.expdatB1 = 'Exp_Up1B_CtrlB_Fst.dat'
+        self.expdatB2 = 'Exp_Up2B_CtrlB_Fst.dat'
+        self.expdat
         self.cdat = 'Exp_CtrlA_CtrlB_Fst.dat'
         self.simdat = glob.glob('*_Simulation_Fst.dat')[0]
         self.region = None
@@ -168,6 +170,7 @@ class FstClass:
 if __name__ == '__main__':
     import os
     import glob
+
     contig = '3R'
     x1 = 7
     x2 = 9

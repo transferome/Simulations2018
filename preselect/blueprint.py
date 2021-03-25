@@ -5,6 +5,11 @@ import harpsnp.snp_count as scount
 
 def walk_region(starting_region, no_recombination_length):
     """Make multiple tuples, verifying that the window size is appropriate over entire starting range"""
+    # sub_region_length = None
+    # if no_recombination_length > 149999:
+    #     sub_region_length = 150000
+    # else:
+    #     sub_region_length = no_recombination_length
     starts = list(range(starting_region[0], starting_region[1], no_recombination_length))
     ends = starts[1:] + [starting_region[1]]
     valid_regions = list(zip(starts, ends))
@@ -29,7 +34,7 @@ class ParamBlueprint:
         self.file = None
 
     def make(self):
-        """Full Program for Tracing by Timer"""
+        """Testing recombination along length of whole region"""
         simulator = self.SimParam(self.chromosome, self.window, self.simulation_number)
         simulator.test_recombination()
         self.windows = walk_region(self.window, simulator.region_length)

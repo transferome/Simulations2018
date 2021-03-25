@@ -11,27 +11,27 @@ def creator(pathname):
 
 
 def main_dir(blueprint):
-    path = '{}:{}-{}'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
+    path = '{}_{}-{}'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
     return creator(path)
 
 
 def junk_dir(blueprint):
-    path = '{}:{}-{}_junk'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
+    path = '{}_{}-{}_junk'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
     return creator(path)
 
 
 def endfreq_dir(blueprint):
-    path = '{}:{}-{}_end_freqs'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
+    path = '{}_{}-{}_end_freqs'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
     return creator(path)
 
 
 def fst_dir(blueprint):
-    path = '{}:{}-{}_Fst'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
+    path = '{}_{}-{}_Fst'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
     return creator(path)
 
 
 def graph_dir(blueprint):
-    path = '{}:{}-{}_data2graph'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
+    path = '{}_{}-{}_data2graph'.format(blueprint.chromosome, str(blueprint.window[0]), str(blueprint.window[1]))
     return creator(path)
 
 

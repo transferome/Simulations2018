@@ -7,7 +7,22 @@ comp2 = ['endGen15Up2A_frequencies.txt', 'endGen15Dwn2A_frequencies.txt', 'Exp_U
 comp3 = ['endGen15Up1B_frequencies.txt', 'endGen15Dwn1B_frequencies.txt', 'Exp_Up1B_Dwn1B']
 comp4 = ['endGen15Up2B_frequencies.txt', 'endGen15Dwn2B_frequencies.txt', 'Exp_Up2B_Dwn2B']
 comp5 = ['endGen15CtrlA_frequencies.txt', 'endGen15CtrlB_frequencies.txt', 'Exp_CtrlA_CtrlB']
-comparisons = [comp1, comp2, comp3, comp4, comp5]
+compUpA = ['endGen15Up1A_frequencies.txt', 'endGen15Up2A_frequencies.txt', 'Exp_Up1A_Up2A']
+compDwnA = ['endGen15Dwn1A_frequencies.txt', 'endGen15Dwn2A_frequencies.txt', 'Exp_Dwn1A_Dwn2A']
+compUpB = ['endGen15Up1A_frequencies.txt', 'endGen15Up2A_frequencies.txt', 'Exp_Up1B_Up2B']
+compDwnB = ['endGen15Dwn1B_frequencies.txt', 'endGen15Dwn2B_frequencies.txt', 'Exp_Dwn1B_Dwn2B']
+compctrl1 = ['endGen15Up1A_frequencies.txt', 'endGen15CtrlA_frequencies.txt', 'Exp_Up1A_CtrlA']
+compctrl2 = ['endGen15Up2A_frequencies.txt', 'endGen15CtrlA_frequencies.txt', 'Exp_Up2A_CtrlA']
+compctrl3 = ['endGen15Dwn1A_frequencies.txt', 'endGen15CtrlA_frequencies.txt', 'Exp_Dwn1A_CtrlA']
+compctrl4 = ['endGen15Dwn2A_frequencies.txt', 'endGen15CtrlA_frequencies.txt', 'Exp_Dwn2A_CtrlA']
+compctrl5 = ['endGen15Up1B_frequencies.txt', 'endGen15CtrlB_frequencies.txt', 'Exp_Up1B_CtrlB']
+compctrl6 = ['endGen15Up2B_frequencies.txt', 'endGen15CtrlB_frequencies.txt', 'Exp_Up2B_CtrlB']
+compctrl7 = ['endGen15Dwn1B_frequencies.txt', 'endGen15CtrlB_frequencies.txt', 'Exp_Dwn1B_CtrlB']
+compctrl8 = ['endGen15Dwn2B_frequencies.txt', 'endGen15CtrlB_frequencies.txt', 'Exp_Dwn2B_CtrlB']
+
+comparisons = [comp1, comp2, comp3, comp4, comp5, compUpA, compDwnA, compUpB, compDwnB,
+               compctrl1, compctrl2, compctrl3, compctrl4, compctrl5, compctrl6, compctrl7,
+               compctrl8]
 
 
 def fst_end(comparison):
