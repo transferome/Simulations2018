@@ -19,7 +19,6 @@ def clear_foundandsample(simreads_tags):
     sample_file = '{}_rep{}.sample'.format(del_file.split('_')[0], simreads_tags[0].replicate)
     os.remove(sample_file)
     os.remove('forqs.seed')
-    
 
 
 def clear_simfreqs(simreads_tags):
