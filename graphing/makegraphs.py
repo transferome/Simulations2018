@@ -28,7 +28,6 @@ plt.rcParams.update({
     "figure.max_open_warning": 0})
 
 
-
 class HarpPlot:
 
     def __init__(self, filename, chromosome):
@@ -109,6 +108,7 @@ class HarpPlot:
         plt.setp(self.ax.get_yticklabels(), fontsize=14)
         self.ax.set_ylabel('Founding Haplotype (DGRP) Frequencies', fontsize=16)
         self.ax.set_xlabel(self.x_axis_label, fontsize=16)
+
 
 # TODO: Easy and Find ymax are here
 def plot_freqs(combined_file_list, chromosome):
