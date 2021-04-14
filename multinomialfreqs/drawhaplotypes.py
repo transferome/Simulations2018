@@ -17,8 +17,8 @@ def random_draw(frequency_list, individuals_drawn, number_of_random_draws):
 def random_dict(region_frequency_dictionary, number_of_random_draws):
     """using the region and frequency dictionary, this creates a dictionary
     of multinomial samplings of the dgrp haplotypes, given a number of individuals, which I'm currently
-    making static here at 2,000"""
-    indi_draw = 2000
+    making static here at 500"""
+    indi_draw = 500
     outdict = dict()
     for key in region_frequency_dictionary.keys():
         frequencies = region_frequency_dictionary[key]
