@@ -1,7 +1,8 @@
 """Functions to handle simreads aspect of a """
 import simreads.simreadsparallel as simreadsparallel
-import simreads.samtoolsviewparallel as view
-import simreads.samtoolssortparallel as sorter
+# import simreads.samtoolsviewparallel as view
+# import simreads.samtoolssortparallel as sorter
+import simreads.samtoolsviewsort as viewsort
 import simreads.samtoolsindexparallel as sindex
 import simreads.cleansimreads as simcleaner
 
@@ -16,11 +17,12 @@ def simreads_parallel(simreads_tags):
 
 
 def simreads_process(simread_tag_region_tag):
-    view.samtools_view_multi(simread_tag_region_tag)
-    sorter.samtools_sort_multi(simread_tag_region_tag)
+    # view.samtools_view_multi(simread_tag_region_tag)
+    # sorter.samtools_sort_multi(simread_tag_region_tag)
+    viewsort.samtools_view_multi(simread_tag_region_tag)
     sindex.samtools_index_multi(simread_tag_region_tag)
     simcleaner.removesams(simread_tag_region_tag)
-    simcleaner.removebams(simread_tag_region_tag)
+    # simcleaner.removebams(simread_tag_region_tag)
     simcleaner.movefreqs(simread_tag_region_tag)
 
 

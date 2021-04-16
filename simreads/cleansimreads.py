@@ -37,11 +37,11 @@ def movefreqs(region_tag):
         shutil.move(seed, 'run_{}'.format(stem))
 
 
-def removebams(region_tag):
-    """removes the list of the original bam files"""
-    bams = listbams(region_tag)
-    for bam in bams:
-        os.remove(bam)
+# def removebams(region_tag):
+#     """removes the list of the original bam files"""
+#     bams = listbams(region_tag)
+#     for bam in bams:
+#         os.remove(bam)
 
 
 def listall(region_tag):

@@ -6,7 +6,8 @@ import subprocess
 
 def samtools_index(bam_file):
     """Samtools index command and process"""
-    command_list = ['samtools', 'index', '{}_sorted.bam'.format(bam_file.split('.bam')[0])]
+    # command_list = ['samtools', 'index', '{}_sorted.bam'.format(bam_file.split('.bam')[0])]
+    command_list = ['samtools', 'index', bam_file]
     command = ' '.join(command_list)
     subprocess.call(command, shell=True)
 

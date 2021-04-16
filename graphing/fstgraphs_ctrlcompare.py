@@ -119,16 +119,21 @@ class FstClass:
         self.ax = None
         self.ymax = None
         self.simcolormap = ['honeydew', 'honeydew', 'honeydew']
-        self.expdatUpAcolormap = ['chartreuse']
-        self.ctrlcolormap = ['orangered']
-        self.expdatUpBcolormap = ['violet']
-        self.expdatDwnAcolormap = ['']
+        self.expdatUpAcolormap = ['orangered']
+        self.ctrlcolormap = ['aliceblue']
+        self.expdatUpBcolormap = ['red']
+        self.expdatDwnAcolormap = ['chartreuse']
+        self.expdatDwnBcolormap = ['yellowgreen']
 
     def find_ymax(self):
         max_val = self.expdatUpA1obj.max(0)
         max_val = self.expdatUpA2obj.max(max_val)
         max_val = self.expdatUpB1obj.max(max_val)
         max_val = self.expdatUpB2obj.max(max_val)
+        max_val = self.expdatDwnA1obj.max(max_val)
+        max_val = self.expdatDwnA2obj.max(max_val)
+        max_val = self.expdatDwnB1obj.max(max_val)
+        max_val = self.expdatDwnB2obj.max(max_val)
         max_val = self.cdatobj.max(max_val)
         max_val = self.simdatobj.max(max_val)
         self.ymax = round(max_val, 2)
@@ -155,12 +160,16 @@ class FstClass:
         self.plotfst(self.ax, self.expdatUpA2obj.dict, self.expdatUpAcolormap, xlim, 0.5)
         self.plotfst(self.ax, self.expdatUpB1obj.dict, self.expdatUpBcolormap, xlim, 1.0)
         self.plotfst(self.ax, self.expdatUpB2obj.dict, self.expdatUpBcolormap, xlim, 0.5)
+        self.plotfst(self.ax, self.expdatDwnA1obj.dict, self.expdatDwnAcolormap, xlim, 1.0)
+        self.plotfst(self.ax, self.expdatDwnA2obj.dict, self.expdatDwnAcolormap, xlim, 0.5)
+        self.plotfst(self.ax, self.expdatDwnB1obj.dict, self.expdatDwnBcolormap, xlim, 1.0)
+        self.plotfst(self.ax, self.expdatDwnB2obj.dict, self.expdatDwnBcolormap, xlim, 0.5)
         self.plotfst(self.ax, self.simdatobj.dict, self.simcolormap, xlim, 1.0, '--')
         self.plotfst(self.ax, self.cdatobj.dict, self.ctrlcolormap, xlim, 0.8)
 
-        custom_lines = [Line2D([0], [0], color='chartreuse', lw=4, label='A Replicates'),
-                        Line2D([0], [0], color='violet', lw=4, label='B Replicates'),
-                        Line2D([0], [0], color='orangered', lw=4, alpha=0.8, label='Controls'),
+        custom_lines = [Line2D([0], [0], color='orangered', lw=4, label='Up Replicates'),
+                        Line2D([0], [0], color='chartreuse', lw=4, label='Down Replicates'),
+                        Line2D([0], [0], color='aliceblue', lw=4, alpha=0.8, label='Controls'),
                         Line2D([0], [0], color='honeydew', lw=4, linestyle='dashed', label='Simulated')]
         # self.ax.set_xticks([idx for idx, s in enumerate(self.positions)])
         xticks = list(range(1, xlim, 1000))
