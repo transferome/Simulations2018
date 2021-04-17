@@ -20,14 +20,15 @@ class ForqsHaplotype:
         self.temp_map = None
         self.map = list()
 
-    def haplotype_map_single(self, snp_position_list):
+    def haplotype_map_single(self):
         """Create the haplotype guide for assembling the recombined forqs haplotype outputs"""
         if self.length == 1:
-            position_indexes = [idx for idx, position in snp_position_list]
-            # position_values = [position for idx, position in snp_position_list]
-            min_index = min(position_indexes)
-            max_index = max(position_indexes)
-            self.map.append([self.founders_set[0], min_index, max_index])
+            # position_indexes = [idx for idx, position in snp_position_list]
+            # # position_values = [position for idx, position in snp_position_list]
+            # min_index = min(position_indexes)
+            # max_index = max(position_indexes)
+            # self.map.append([self.founders_set[0], min_index, max_index])
+            self.map.append([self.founders_set[0]])
         else:
             print('Problem making haplotypes from the forqs population file')
 
@@ -37,18 +38,18 @@ def construct_individual(forq_haplotype_object, hap_dict, hap_id_dict):
     # get the value, which is the key for the dgrp hap_dict, from the hap_id_dict
     dgrp_key = hap_id_dict[str(forq_haplotype_object.founders[0])]
     haplotype = hap_dict[dgrp_key]
-    haplotype_seq = haplotype[forq_haplotype_object.map[0][1]:forq_haplotype_object.map[0][2] + 1]
-    return haplotype_seq
+    # haplotype_seq = haplotype[forq_haplotype_object.map[0][1]:forq_haplotype_object.map[0][2] + 1]
+    return haplotype
 
 
-def process_population(poplist, snp_position_list, hap_dict, hap_id_dict):
+def process_population(poplist, hap_dict, hap_id_dict):
     """Given the population list from a read in popfile, this constructs haplotypes for all individuals"""
     haplist = list()
     templist = list()
     outlist = list()
     for line in poplist:
         individual = ForqsHaplotype(line)
-        individual.haplotype_map_single(snp_position_list)
+        individual.haplotype_map_single()
         haplist.append(construct_individual(individual, hap_dict, hap_id_dict))
     for hap in haplist:
         new_hap = list(hap)
