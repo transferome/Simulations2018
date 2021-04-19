@@ -20,6 +20,7 @@ def read_freq(chromosome, freqfile):
     return file
 
 
+
 class SumFreq:
 
     def __init__(self, chromosome):

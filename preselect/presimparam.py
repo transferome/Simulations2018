@@ -2,7 +2,7 @@
 haplotype frequency"""
 import recombination.convert_recmap as converter
 import preselect.preforqs.config as config
-import forqs.forqs_parallel as fp
+import forqs.forqs_parallel as forqs
 import preselect.preforqs.forq_organizer as forg
 import preselect.preforqs.recombination_search as rcount
 
@@ -44,7 +44,7 @@ class PreSimParam:
             config.main_preconfig(self.region_length, recombination_map, self.simulation_number)
             configs = config.list_simulation_configs()
             # print(configs)
-            fp.forqs_parallel(configs)
+            forqs.forqs_parallel(configs)
             finfo = forg.Organizer(self.contig, self.region, self.simulation_number)
             finfo.move_configs()
             self.recombination_number = rcount.counts(finfo.population_files)
@@ -65,7 +65,7 @@ class PreSimParam:
         config.main_preconfig(self.region_length, recombination_map, self.simulation_number)
         configs = config.list_simulation_configs()
         # print(configs)
-        fp.forqs_parallel(configs)
+        forqs.forqs_parallel(configs)
         finfo = forg.Organizer(self.contig, self.region, self.simulation_number)
         finfo.move_configs()
         self.recombination_number = rcount.counts(finfo.population_files)

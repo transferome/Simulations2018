@@ -13,6 +13,5 @@ def count_snps(chromosome, region):
     return counter
 
 
-
 if __name__ == '__main__':
     pass
